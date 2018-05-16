@@ -1,0 +1,51 @@
+spring:
+  datasource:
+      coin:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        name: trade
+        url: jdbc:mysql://192.168.80.202:3306/coin?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+        username: coin_jh
+        password: coin_jh
+
+      #druid配置 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+      druid:
+        initial-size: 10
+        max-active: 100
+        min-idle: 10
+        max-wait: 60000
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 300000
+        validation-query: SELECT 1 FROM DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        stat-view-servlet:
+             enabled: true
+             url-pattern: /druid/*
+             login-username: admin
+             login-password: admin
+        filter:
+             stat:
+                 log-slow-sql: true
+                 slow-sql-millis: 1000
+                 merge-sql: true
+
+    #redis配置
+  redis:
+      open: false  # 是否开启redis缓存  true开启   false关闭
+      database: 0  #数据库索引（默认为0）
+#      host: 192.168.80.33
+#      port: 6379
+      password: redis33      # 密码（默认为空）
+      timeout: 6000  # 连接超时时长（毫秒）
+      pool:
+          max-active: 1000  # 连接池最大连接数（使用负值表示没有限制）
+          max-wait: -1      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-idle: 10      # 连接池中的最大空闲连接
+          min-idle: 5       # 连接池中的最小空闲连接
+      sentinel:
+          master: mymaster  # 哨兵的配置列表
+          nodes: 192.168.80.33:16277,192.168.80.33:26377,192.168.80.178:26379

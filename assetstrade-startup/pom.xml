@@ -1,0 +1,55 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>assetstrade-startup</artifactId>
+    <packaging>war</packaging>
+    <description>项目打包</description>
+
+    <parent>
+        <groupId>com.jinhui</groupId>
+        <artifactId>assetstrade</artifactId>
+        <version>${assetstrade-version}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jinhui</groupId>
+            <artifactId>assetstrade-common</artifactId>
+            <version>${assetstrade-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinhui</groupId>
+            <artifactId>assetstrade-api</artifactId>
+            <version>${assetstrade-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jinhui</groupId>
+            <artifactId>assetstrade-web</artifactId>
+            <version>${assetstrade-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>assetstrade</finalName>
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;防止控制台乱码&ndash;&gt;-->
+                    <!--<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>-->
+                <!--</configuration>-->
+                <!--&lt;!&ndash; mvn spring-boot:repackage &ndash;&gt;-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>repackage</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+
+    </build>
+
+</project>

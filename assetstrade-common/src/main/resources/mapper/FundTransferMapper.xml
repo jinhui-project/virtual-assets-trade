@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.FundTransferMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.FundTransfer" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="trans_time" property="transTime" jdbcType="TIMESTAMP" />
+    <result column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="CHAR" />
+    <result column="buss_type" property="bussType" jdbcType="CHAR" />
+    <result column="transfer_out_account" property="transferOutAccount" jdbcType="VARCHAR" />
+    <result column="transfer_in_account" property="transferInAccount" jdbcType="VARCHAR" />
+    <result column="trans_num" property="transNum" jdbcType="DECIMAL" />
+    <result column="trans_price" property="transPrice" jdbcType="DECIMAL" />
+    <result column="trans_amount" property="transAmount" jdbcType="DECIMAL" />
+    <result column="charge_amount" property="chargeAmount" jdbcType="DECIMAL" />
+    <result column="trans_status" property="transStatus" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, trans_time, serial_no, user_id, user_name, account_type, buss_type, transfer_out_account,
+    transfer_in_account, trans_num, trans_price, trans_amount, charge_amount, trans_status, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fund_transfer
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="queryListBySearch" resultMap="BaseResultMap">
+    select
+      id, trans_time, serial_no, user_id, user_name,
+      case when account_type = '1' then 'BTC' when account_type = '2' then 'ETH' when account_type = '3' then 'LTC' when account_type = '4' then 'USDT' when account_type = '5' then 'BCH' when account_type = '6' then 'ETC' end as account_type,
+      case when buss_type = '02' then '存入' when buss_type = '03' then '提现' end as buss_type,
+      transfer_out_account,
+      transfer_in_account, trans_num, trans_price, trans_amount, charge_amount,
+      case when trans_status = '0' then '处理中' when trans_status = '1' then '成功' when trans_status = '2' then '失败' end as trans_status,
+      create_time, update_time
+    from fund_transfer
+    where 1 = 1
+    <if test="startDate != null and startDate != ''" >
+      and DATE_FORMAT(trans_time,'%Y-%m-%d') = #{startDate}
+    </if>
+    <if test="accountType != null and accountType != ''" >
+      and account_type = #{accountType}
+    </if>
+    <if test="userId != null" >
+      and user_id = #{userId}
+    </if>
+    order by create_time desc
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fund_transfer
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.common.entity.po.FundTransfer" >
+    insert into fund_transfer (id, trans_time, serial_no, 
+      user_id, user_name, account_type,
+      buss_type, transfer_out_account, transfer_in_account, 
+      trans_num, trans_price, trans_amount, 
+      charge_amount, trans_status, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{transTime,jdbcType=TIMESTAMP}, #{serialNo,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{accountType,jdbcType=CHAR},
+      #{bussType,jdbcType=CHAR}, #{transferOutAccount,jdbcType=VARCHAR}, #{transferInAccount,jdbcType=VARCHAR}, 
+      #{transNum,jdbcType=DECIMAL}, #{transPrice,jdbcType=DECIMAL}, #{transAmount,jdbcType=DECIMAL}, 
+      #{chargeAmount,jdbcType=DECIMAL}, #{transStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.FundTransfer" >
+    insert into fund_transfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="1 == 1" >
+        trans_time,
+      </if>
+      <if test="serialNo != null" >
+        serial_no,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="bussType != null" >
+        buss_type,
+      </if>
+      <if test="transferOutAccount != null" >
+        transfer_out_account,
+      </if>
+      <if test="transferInAccount != null" >
+        transfer_in_account,
+      </if>
+      <if test="transNum != null" >
+        trans_num,
+      </if>
+      <if test="transPrice != null" >
+        trans_price,
+      </if>
+      <if test="transAmount != null" >
+        trans_amount,
+      </if>
+      <if test="chargeAmount != null" >
+        charge_amount,
+      </if>
+      <if test="transStatus != null" >
+        trans_status,
+      </if>
+      <if test="1 == 1" >
+        create_time,
+      </if>
+      <if test="1 == 1" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=CHAR},
+      </if>
+      <if test="bussType != null" >
+        #{bussType,jdbcType=CHAR},
+      </if>
+      <if test="transferOutAccount != null" >
+        #{transferOutAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transferInAccount != null" >
+        #{transferInAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transNum != null" >
+        #{transNum,jdbcType=DECIMAL},
+      </if>
+      <if test="transPrice != null" >
+        #{transPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transAmount != null" >
+        #{transAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeAmount != null" >
+        #{chargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="transStatus != null" >
+        #{transStatus,jdbcType=CHAR},
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.common.entity.po.FundTransfer" >
+    update fund_transfer
+    <set >
+      <if test="transTime != null" >
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serialNo != null" >
+        serial_no = #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=CHAR},
+      </if>
+      <if test="bussType != null" >
+        buss_type = #{bussType,jdbcType=CHAR},
+      </if>
+      <if test="transferOutAccount != null" >
+        transfer_out_account = #{transferOutAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transferInAccount != null" >
+        transfer_in_account = #{transferInAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="transNum != null" >
+        trans_num = #{transNum,jdbcType=DECIMAL},
+      </if>
+      <if test="transPrice != null" >
+        trans_price = #{transPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transAmount != null" >
+        trans_amount = #{transAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="chargeAmount != null" >
+        charge_amount = #{chargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="transStatus != null" >
+        trans_status = #{transStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.common.entity.po.FundTransfer" >
+    update fund_transfer
+    set trans_time = #{transTime,jdbcType=TIMESTAMP},
+      serial_no = #{serialNo,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=CHAR},
+      buss_type = #{bussType,jdbcType=CHAR},
+      transfer_out_account = #{transferOutAccount,jdbcType=VARCHAR},
+      transfer_in_account = #{transferInAccount,jdbcType=VARCHAR},
+      trans_num = #{transNum,jdbcType=DECIMAL},
+      trans_price = #{transPrice,jdbcType=DECIMAL},
+      trans_amount = #{transAmount,jdbcType=DECIMAL},
+      charge_amount = #{chargeAmount,jdbcType=DECIMAL},
+      trans_status = #{transStatus,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="statistics" resultType="java.math.BigDecimal">
+    select
+    IFNULL( sum(trans_amount),0)
+    from fund_transfer
+    where  user_id = #{userId}
+    and  buss_type = #{bussType}
+    and trans_status = #{transStatus}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from fund_transfer
+
+    </select>
+
+  <select id="selectByActType" resultMap="BaseResultMap">
+
+    select
+    <include refid="Base_Column_List" />
+    from fund_transfer
+    where account_type =#{accountType}
+    and trans_status =#{transStatus}
+    order by create_time asc
+  </select>
+</mapper>

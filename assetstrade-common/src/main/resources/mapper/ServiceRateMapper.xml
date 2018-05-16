@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.ServiceRateMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.ServiceRate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="rate_name" property="rateName" jdbcType="VARCHAR" />
+    <result column="rate" property="rate" jdbcType="DECIMAL" />
+    <result column="rate_type" property="rateType" jdbcType="CHAR" />
+    <result column="create_time" property="createTimes" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rate_name, rate, rate_type, create_time
+  </sql>
+  <select id="selectByRateType" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from service_rate
+    where rate_type = #{rateType}
+  </select>
+
+</mapper>

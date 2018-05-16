@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinhui.common.mapper.WalletMapper">
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.Wallet">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="wallet_name" jdbcType="CHAR" property="walletName" />
+    <result column="address" jdbcType="CHAR" property="address" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="balance" jdbcType="DECIMAL" property="balance" />
+    <result column="balance_unit" jdbcType="CHAR" property="balanceUnit" />
+    <result column="convert_balance" jdbcType="DECIMAL" property="convertBalance" />
+    <result column="convert_unit" jdbcType="CHAR" property="convertUnit" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, wallet_name, address, type, balance, balance_unit, convert_balance, convert_unit, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from wallet
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from wallet
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.common.entity.po.Wallet">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into wallet (id, wallet_name, address, 
+      type, balance, balance_unit, 
+      convert_balance, convert_unit, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{walletName,jdbcType=CHAR}, #{address,jdbcType=CHAR}, 
+      #{type,jdbcType=VARCHAR}, #{balance,jdbcType=DECIMAL}, #{balanceUnit,jdbcType=CHAR}, 
+      #{convertBalance,jdbcType=DECIMAL}, #{convertUnit,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.Wallet">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into wallet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="walletName != null">
+        wallet_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="balance != null">
+        balance,
+      </if>
+      <if test="balanceUnit != null">
+        balance_unit,
+      </if>
+      <if test="convertBalance != null">
+        convert_balance,
+      </if>
+      <if test="convertUnit != null">
+        convert_unit,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="walletName != null">
+        #{walletName,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceUnit != null">
+        #{balanceUnit,jdbcType=CHAR},
+      </if>
+      <if test="convertBalance != null">
+        #{convertBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="convertUnit != null">
+        #{convertUnit,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.common.entity.po.Wallet">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update wallet
+    <set>
+      <if test="walletName != null">
+        wallet_name = #{walletName,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        balance = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceUnit != null">
+        balance_unit = #{balanceUnit,jdbcType=CHAR},
+      </if>
+      <if test="convertBalance != null">
+        convert_balance = #{convertBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="convertUnit != null">
+        convert_unit = #{convertUnit,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.common.entity.po.Wallet">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update wallet
+    set wallet_name = #{walletName,jdbcType=CHAR},
+      address = #{address,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      balance_unit = #{balanceUnit,jdbcType=CHAR},
+      convert_balance = #{convertBalance,jdbcType=DECIMAL},
+      convert_unit = #{convertUnit,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateBalance">
+    update wallet
+    set balance = #{balance,jdbcType=DECIMAL},
+    convert_balance = #{convertBalance,jdbcType=DECIMAL}
+    where  address = #{address,jdbcType=CHAR}
+    and  type = #{type,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wallet
+  </select>
+</mapper>

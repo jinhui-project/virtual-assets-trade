@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.PlatformAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.PlatformAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="account_addr" property="accountAddr" jdbcType="VARCHAR" />
+    <result column="account_desc" property="accountDesc" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="min_withdraw" property="minWithdraw" jdbcType="DECIMAL" />
+    <result column="max_withdraw" property="maxWithdraw" jdbcType="DECIMAL" />
+    <result column="min_recharge" property="minRecharge" jdbcType="DECIMAL" />
+    <result column="max_recharge" property="maxRecharge" jdbcType="DECIMAL" />
+    <result column="position_vol" property="positionVol" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_name, account_addr, account_desc,account_type,position_vol,min_withdraw,max_withdraw, create_time
+  </sql>
+  <select id="selectByType" resultMap="BaseResultMap">
+    select account_addr, min_withdraw, max_withdraw,min_recharge,max_recharge from platform_account
+    where account_type = #{accountType}
+  </select>
+
+  <select id="selectAllAccount" resultMap="BaseResultMap">
+    select account_name,account_type from platform_account where account_flag = 1
+  </select>
+
+  <update id="subtractPosition">
+    update platform_account set position_vol =( position_vol - #{amount}) where account_type = #{accountType}
+    and (position_vol - #{amount}) &gt;= 0
+  </update>
+
+  <update id="addPosition">
+    update platform_account set position_vol = position_vol + #{amount} where account_type = #{accountType}
+  </update>
+
+</mapper>

@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>assetstrade-api</artifactId>
+    <packaging>jar</packaging>
+    <description>api模块</description>
+
+    <parent>
+        <groupId>com.jinhui</groupId>
+        <artifactId>assetstrade</artifactId>
+        <version>${assetstrade-version}</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jinhui</groupId>
+            <artifactId>assetstrade-common</artifactId>
+            <version>${assetstrade-version}</version>
+        </dependency>
+
+        <!--mock测试数据-->
+        <dependency>
+            <groupId>com.github.jsonzou</groupId>
+            <artifactId>jmockdata</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
+
+    </dependencies>
+</project>

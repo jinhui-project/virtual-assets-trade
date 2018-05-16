@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.api.mapper.RegularProductMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.api.entity.po.RegularProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_id" property="productId" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_class" property="productClass" jdbcType="CHAR" />
+    <result column="product_type" property="productType" jdbcType="CHAR" />
+    <result column="product_expdate" property="productExpdate" jdbcType="INTEGER" />
+    <result column="pay_unit" property="payUnit" jdbcType="CHAR" />
+    <result column="expdate_unit" property="expdateUnit" jdbcType="CHAR" />
+    <result column="income_rate" property="incomeRate" jdbcType="DECIMAL" />
+    <result column="subs_start_amount" property="subsStartAmount" jdbcType="DECIMAL" />
+    <result column="subs_range" property="subsRange" jdbcType="DECIMAL" />
+    <result column="cal_income_way" property="calIncomeWay" jdbcType="CHAR" />
+    <result column="rate_date" property="rateDate" jdbcType="DATE" />
+    <result column="term_date" property="termDate" jdbcType="DATE" />
+    <result column="risk_level" property="riskLevel" jdbcType="CHAR" />
+    <result column="interest_type" property="interestType" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, product_id, product_name, product_class, product_type, product_expdate, pay_unit, 
+    expdate_unit, income_rate, subs_start_amount, subs_range, cal_income_way, rate_date, 
+    term_date, risk_level, interest_type, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from regular_product
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from regular_product
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.api.entity.po.RegularProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into regular_product (id, product_id, product_name, 
+      product_class, product_type, product_expdate, 
+      pay_unit, expdate_unit, income_rate, 
+      subs_start_amount, subs_range, cal_income_way, 
+      rate_date, term_date, risk_level, 
+      interest_type, create_time)
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productClass,jdbcType=CHAR}, #{productType,jdbcType=CHAR}, #{productExpdate,jdbcType=INTEGER}, 
+      #{payUnit,jdbcType=CHAR}, #{expdateUnit,jdbcType=CHAR}, #{incomeRate,jdbcType=DECIMAL}, 
+      #{subsStartAmount,jdbcType=DECIMAL}, #{subsRange,jdbcType=DECIMAL}, #{calIncomeWay,jdbcType=CHAR}, 
+      #{rateDate,jdbcType=DATE}, #{termDate,jdbcType=DATE}, #{riskLevel,jdbcType=CHAR}, 
+      #{interestType,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.api.entity.po.RegularProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into regular_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productId != null" >
+        product_id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productClass != null" >
+        product_class,
+      </if>
+      <if test="productType != null" >
+        product_type,
+      </if>
+      <if test="productExpdate != null" >
+        product_expdate,
+      </if>
+      <if test="payUnit != null" >
+        pay_unit,
+      </if>
+      <if test="expdateUnit != null" >
+        expdate_unit,
+      </if>
+      <if test="incomeRate != null" >
+        income_rate,
+      </if>
+      <if test="subsStartAmount != null" >
+        subs_start_amount,
+      </if>
+      <if test="subsRange != null" >
+        subs_range,
+      </if>
+      <if test="calIncomeWay != null" >
+        cal_income_way,
+      </if>
+      <if test="rateDate != null" >
+        rate_date,
+      </if>
+      <if test="termDate != null" >
+        term_date,
+      </if>
+      <if test="riskLevel != null" >
+        risk_level,
+      </if>
+      <if test="interestType != null" >
+        interest_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null" >
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productClass != null" >
+        #{productClass,jdbcType=CHAR},
+      </if>
+      <if test="productType != null" >
+        #{productType,jdbcType=CHAR},
+      </if>
+      <if test="productExpdate != null" >
+        #{productExpdate,jdbcType=INTEGER},
+      </if>
+      <if test="payUnit != null" >
+        #{payUnit,jdbcType=CHAR},
+      </if>
+      <if test="expdateUnit != null" >
+        #{expdateUnit,jdbcType=CHAR},
+      </if>
+      <if test="incomeRate != null" >
+        #{incomeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="subsStartAmount != null" >
+        #{subsStartAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="subsRange != null" >
+        #{subsRange,jdbcType=DECIMAL},
+      </if>
+      <if test="calIncomeWay != null" >
+        #{calIncomeWay,jdbcType=CHAR},
+      </if>
+      <if test="rateDate != null" >
+        #{rateDate,jdbcType=DATE},
+      </if>
+      <if test="termDate != null" >
+        #{termDate,jdbcType=DATE},
+      </if>
+      <if test="riskLevel != null" >
+        #{riskLevel,jdbcType=CHAR},
+      </if>
+      <if test="interestType != null" >
+        #{interestType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.api.entity.po.RegularProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update regular_product
+    <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productClass != null" >
+        product_class = #{productClass,jdbcType=CHAR},
+      </if>
+      <if test="productType != null" >
+        product_type = #{productType,jdbcType=CHAR},
+      </if>
+      <if test="productExpdate != null" >
+        product_expdate = #{productExpdate,jdbcType=INTEGER},
+      </if>
+      <if test="payUnit != null" >
+        pay_unit = #{payUnit,jdbcType=CHAR},
+      </if>
+      <if test="expdateUnit != null" >
+        expdate_unit = #{expdateUnit,jdbcType=CHAR},
+      </if>
+      <if test="incomeRate != null" >
+        income_rate = #{incomeRate,jdbcType=DECIMAL},
+      </if>
+      <if test="subsStartAmount != null" >
+        subs_start_amount = #{subsStartAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="subsRange != null" >
+        subs_range = #{subsRange,jdbcType=DECIMAL},
+      </if>
+      <if test="calIncomeWay != null" >
+        cal_income_way = #{calIncomeWay,jdbcType=CHAR},
+      </if>
+      <if test="rateDate != null" >
+        rate_date = #{rateDate,jdbcType=DATE},
+      </if>
+      <if test="termDate != null" >
+        term_date = #{termDate,jdbcType=DATE},
+      </if>
+      <if test="riskLevel != null" >
+        risk_level = #{riskLevel,jdbcType=CHAR},
+      </if>
+      <if test="interestType != null" >
+        interest_type = #{interestType,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.api.entity.po.RegularProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update regular_product
+    set product_id = #{productId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_class = #{productClass,jdbcType=CHAR},
+      product_type = #{productType,jdbcType=CHAR},
+      product_expdate = #{productExpdate,jdbcType=INTEGER},
+      pay_unit = #{payUnit,jdbcType=CHAR},
+      expdate_unit = #{expdateUnit,jdbcType=CHAR},
+      income_rate = #{incomeRate,jdbcType=DECIMAL},
+      subs_start_amount = #{subsStartAmount,jdbcType=DECIMAL},
+      subs_range = #{subsRange,jdbcType=DECIMAL},
+      cal_income_way = #{calIncomeWay,jdbcType=CHAR},
+      rate_date = #{rateDate,jdbcType=DATE},
+      term_date = #{termDate,jdbcType=DATE},
+      risk_level = #{riskLevel,jdbcType=CHAR},
+      interest_type = #{interestType,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from regular_product
+
+  </select>
+
+
+  <select id="selectByName" resultMap="BaseResultMap" >
+
+    select
+    <include refid="Base_Column_List" />
+    from regular_product
+    where   product_name = #{productName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" >
+
+    select
+    <include refid="Base_Column_List" />
+    from regular_product
+    where   product_id = #{productId,jdbcType=VARCHAR}
+  </select>
+</mapper>

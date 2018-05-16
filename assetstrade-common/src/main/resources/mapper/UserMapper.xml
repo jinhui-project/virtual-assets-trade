@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="id_type" property="idType" jdbcType="CHAR" />
+    <result column="id_no" property="idNo" jdbcType="CHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="profession" property="profession" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="CHAR" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
+    <result column="trade_pwd" property="tradePwd" jdbcType="VARCHAR" />
+    <result column="attorney_flag" property="attorneyFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, user_name, id_type, id_no, phone, email, sex, profession, address, login_pwd, trade_pwd,attorney_flag,
+    register_time
+  </sql>
+
+  <select id="selectBySective" resultMap="BaseResultMap" parameterType="com.jinhui.common.entity.po.User">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where 1 = 1
+    <if test="phone != null" >
+     and phone = #{phone}
+    </if>
+    <if test="loginPwd != null" >
+     and login_pwd = #{loginPwd}
+    </if>
+    <if test="userId != null" >
+      and user_id = #{userId}
+    </if>
+  </select>
+
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="idType != null" >
+        id_type,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="loginPwd != null" >
+        login_pwd,
+      </if>
+      <if test="tradePwd != null" >
+        trade_pwd,
+      </if>
+      <if test="1 == 1" >
+        register_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=CHAR},
+      </if>
+      <if test="loginPwd != null" >
+        #{loginPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="tradePwd != null" >
+        #{tradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="1 == 1" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByUserId" parameterType="com.jinhui.common.entity.po.User" >
+    update user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        id_type = #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=CHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=CHAR},
+      </if>
+      <if test="tradePwd != null" >
+        trade_pwd = #{tradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="attorneyFlag != null" >
+        attorney_flag = #{attorneyFlag,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    where user_id = #{userId}
+  </update>
+
+  <update id="closeAssetsMgt" parameterType="com.jinhui.common.entity.po.User" >
+    update user set attorney_flag = #{attorneyFlag,jdbcType=VARCHAR},sys_user_id = ''
+    where user_id = #{userId}
+  </update>
+
+</mapper>

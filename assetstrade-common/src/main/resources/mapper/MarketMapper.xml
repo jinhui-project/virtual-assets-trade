@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinhui.common.mapper.MarketMapper">
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.Market">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_type" jdbcType="CHAR" property="productType" />
+    <result column="buy_cal_unit" jdbcType="CHAR" property="buyCalUnit" />
+    <result column="buy_done_unit" jdbcType="CHAR" property="buyDoneUnit" />
+    <result column="sell_cal_unit" jdbcType="CHAR" property="sellCalUnit" />
+    <result column="sell_done_unit" jdbcType="CHAR" property="sellDoneUnit" />
+    <result column="buy_pay_unit" jdbcType="CHAR" property="buyPayUnit" />
+    <result column="sell_pay_unit" jdbcType="CHAR" property="sellPayUnit" />
+    <result column="buy_min_vol" jdbcType="DECIMAL" property="buyMinVol" />
+    <result column="sell_min_vol" jdbcType="DECIMAL" property="sellMinVol" />
+    <result column="last_price" jdbcType="DECIMAL" property="lastPrice" />
+    <result column="high_price" jdbcType="DECIMAL" property="highPrice" />
+    <result column="low_price" jdbcType="DECIMAL" property="lowPrice" />
+    <result column="buy_price" jdbcType="DECIMAL" property="buyPrice" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="price_change" jdbcType="DECIMAL" property="priceChange" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, product_id, product_name, product_type, buy_cal_unit, buy_done_unit, sell_cal_unit, 
+    sell_done_unit, buy_pay_unit, sell_pay_unit, buy_min_vol, sell_min_vol, last_price, 
+    high_price, low_price, buy_price, sell_price, price_change, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from market
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from market
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.common.entity.po.Market">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into market (id, product_id, product_name, 
+      product_type, buy_cal_unit, buy_done_unit, 
+      sell_cal_unit, sell_done_unit, buy_pay_unit, 
+      sell_pay_unit, buy_min_vol, sell_min_vol, 
+      last_price, high_price, low_price, 
+      buy_price, sell_price, price_change, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{productType,jdbcType=CHAR}, #{buyCalUnit,jdbcType=CHAR}, #{buyDoneUnit,jdbcType=CHAR}, 
+      #{sellCalUnit,jdbcType=CHAR}, #{sellDoneUnit,jdbcType=CHAR}, #{buyPayUnit,jdbcType=CHAR}, 
+      #{sellPayUnit,jdbcType=CHAR}, #{buyMinVol,jdbcType=DECIMAL}, #{sellMinVol,jdbcType=DECIMAL}, 
+      #{lastPrice,jdbcType=DECIMAL}, #{highPrice,jdbcType=DECIMAL}, #{lowPrice,jdbcType=DECIMAL}, 
+      #{buyPrice,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL}, #{priceChange,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.Market">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into market
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="buyCalUnit != null">
+        buy_cal_unit,
+      </if>
+      <if test="buyDoneUnit != null">
+        buy_done_unit,
+      </if>
+      <if test="sellCalUnit != null">
+        sell_cal_unit,
+      </if>
+      <if test="sellDoneUnit != null">
+        sell_done_unit,
+      </if>
+      <if test="buyPayUnit != null">
+        buy_pay_unit,
+      </if>
+      <if test="sellPayUnit != null">
+        sell_pay_unit,
+      </if>
+      <if test="buyMinVol != null">
+        buy_min_vol,
+      </if>
+      <if test="sellMinVol != null">
+        sell_min_vol,
+      </if>
+      <if test="lastPrice != null">
+        last_price,
+      </if>
+      <if test="highPrice != null">
+        high_price,
+      </if>
+      <if test="lowPrice != null">
+        low_price,
+      </if>
+      <if test="buyPrice != null">
+        buy_price,
+      </if>
+      <if test="sellPrice != null">
+        sell_price,
+      </if>
+      <if test="priceChange != null">
+        price_change,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=CHAR},
+      </if>
+      <if test="buyCalUnit != null">
+        #{buyCalUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyDoneUnit != null">
+        #{buyDoneUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellCalUnit != null">
+        #{sellCalUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellDoneUnit != null">
+        #{sellDoneUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyPayUnit != null">
+        #{buyPayUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellPayUnit != null">
+        #{sellPayUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyMinVol != null">
+        #{buyMinVol,jdbcType=DECIMAL},
+      </if>
+      <if test="sellMinVol != null">
+        #{sellMinVol,jdbcType=DECIMAL},
+      </if>
+      <if test="lastPrice != null">
+        #{lastPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="highPrice != null">
+        #{highPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="lowPrice != null">
+        #{lowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPrice != null">
+        #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceChange != null">
+        #{priceChange,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.common.entity.po.Market">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update market
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=CHAR},
+      </if>
+      <if test="buyCalUnit != null">
+        buy_cal_unit = #{buyCalUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyDoneUnit != null">
+        buy_done_unit = #{buyDoneUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellCalUnit != null">
+        sell_cal_unit = #{sellCalUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellDoneUnit != null">
+        sell_done_unit = #{sellDoneUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyPayUnit != null">
+        buy_pay_unit = #{buyPayUnit,jdbcType=CHAR},
+      </if>
+      <if test="sellPayUnit != null">
+        sell_pay_unit = #{sellPayUnit,jdbcType=CHAR},
+      </if>
+      <if test="buyMinVol != null">
+        buy_min_vol = #{buyMinVol,jdbcType=DECIMAL},
+      </if>
+      <if test="sellMinVol != null">
+        sell_min_vol = #{sellMinVol,jdbcType=DECIMAL},
+      </if>
+      <if test="lastPrice != null">
+        last_price = #{lastPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="highPrice != null">
+        high_price = #{highPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="lowPrice != null">
+        low_price = #{lowPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="buyPrice != null">
+        buy_price = #{buyPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sellPrice != null">
+        sell_price = #{sellPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="priceChange != null">
+        price_change = #{priceChange,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.common.entity.po.Market">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update market
+    set product_id = #{productId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_type = #{productType,jdbcType=CHAR},
+      buy_cal_unit = #{buyCalUnit,jdbcType=CHAR},
+      buy_done_unit = #{buyDoneUnit,jdbcType=CHAR},
+      sell_cal_unit = #{sellCalUnit,jdbcType=CHAR},
+      sell_done_unit = #{sellDoneUnit,jdbcType=CHAR},
+      buy_pay_unit = #{buyPayUnit,jdbcType=CHAR},
+      sell_pay_unit = #{sellPayUnit,jdbcType=CHAR},
+      buy_min_vol = #{buyMinVol,jdbcType=DECIMAL},
+      sell_min_vol = #{sellMinVol,jdbcType=DECIMAL},
+      last_price = #{lastPrice,jdbcType=DECIMAL},
+      high_price = #{highPrice,jdbcType=DECIMAL},
+      low_price = #{lowPrice,jdbcType=DECIMAL},
+      buy_price = #{buyPrice,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      price_change = #{priceChange,jdbcType=DECIMAL},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByProductId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market
+    where product_id = #{productId,jdbcType=VARCHAR}
+  </select>
+
+
+
+  <select id="selectByProductName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market
+    where  product_name = #{productName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from market
+  </select>
+
+    <select id="selectByBuyPayAndSellPay"  resultMap="BaseResultMap">
+
+      select
+      <include refid="Base_Column_List" />
+      from market where buy_pay_unit = #{buyPayUnit}
+      and sell_pay_unit = #{sellPayUnit}
+
+    </select>
+
+</mapper>

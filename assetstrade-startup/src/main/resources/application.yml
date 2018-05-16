@@ -1,0 +1,43 @@
+# Tomcat-jar包启动
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 8080
+    connection-timeout: 5000
+    context-path: /
+
+spring:
+#    # 环境 dev|test|pro  推荐在jvm启动参数中配置-Dspring.profiles.active=dev
+    profiles:
+        active: dev
+
+    # jackson时间格式化,必须和前端约定统一的日期格式都是下面这种
+    jackson:
+        time-zone: GMT+8
+        date-format: yyyy-MM-dd HH:mm:ss
+    #文件上传配置
+    http:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            enabled: true
+
+    resources: # 指定静态资源的路径
+        static-locations: classpath:/static/,classpath:/views/,classpath:/META-INF/resources/
+
+
+
+# Mybatis配置
+#    mapperLocations: classpath*:mapper/**/*.xml
+#    configLocation: classpath:mybatis.xml
+
+#短信验证码
+gateWayIP: 211.147.239.62
+gateWayPort: 9080
+accountName: jfb@jinhui
+password: nLpBhs8F
+
+
+

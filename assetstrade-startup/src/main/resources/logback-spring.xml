@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="log.moduleName" value="assetstrade"/> <!-- 日志名称 -->
+    <property name="log.base" value="/opt/appl/coin/tomcat/logs/${log.moduleName}"/> <!-- 日志目录 -->
+    <property name="log.maxSize" value="20 mb"/> <!-- 日志文件大小 -->
+
+    <!--控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} -%msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志文件输出 -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 设置日志不超过${log.max.size}时的保存路径，注意如果是web项目会保存到Tomcat的bin目录下 -->
+        <File>${log.base}/${log.moduleName}.log</File>
+        <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件。 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}/archive/${log.moduleName}_all_%d{yyyy-MM-dd}.%i.log.zip
+            </FileNamePattern>
+            <!-- 当天的日志大小 超过${log.maxSize}时,压缩日志并保存 -->
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${log.maxSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 日志输出的文件的格式 -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!-- <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread]%logger{56}.%method:%L -%msg%n</pattern> -->
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{100} -%msg%n</pattern>
+        </layout>
+    </appender>
+
+
+    <!-- 开发 -->
+    <springProfile name="dev">
+        <logger name="org.springframework.web" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="org.springboot.sample" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="com.jinhui" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
+    </springProfile>
+
+    <!-- 测试环境 -->
+    <springProfile name="test">
+        <logger name="org.springframework.web" level="DEBUG">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </logger>
+        <logger name="org.springboot.sample" level="DEBUG">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </logger>
+        <logger name="com.jinhui" level="DEBUG">
+            <appender-ref ref="console"/>
+            <appender-ref ref="file"/>
+        </logger>
+    </springProfile>
+
+    <!-- 生产环境 -->
+    <springProfile name="pro">
+        <logger name="org.springframework.web" level="INFO">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="org.springboot.sample" level="INFO">
+            <appender-ref ref="console"/>
+        </logger>
+        <logger name="com.jinhui" level="DEBUG">
+            <appender-ref ref="console"/>
+        </logger>
+    </springProfile>
+
+
+</configuration>

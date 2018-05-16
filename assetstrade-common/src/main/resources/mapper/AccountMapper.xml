@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.Account" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="CHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_account" property="userAccount" jdbcType="CHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="position_vol" property="positionVol" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, user_id, user_name, user_account, account_name, account_type, position_vol, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.common.entity.po.Account" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into account (id, user_id, user_name, 
+      user_account, account_name, account_type, 
+      position_vol, create_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=CHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userAccount,jdbcType=CHAR}, #{accountName,jdbcType=VARCHAR}, #{accountType,jdbcType=VARCHAR}, 
+      #{positionVol,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.Account" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userAccount != null" >
+        user_account,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="accountType != null" >
+        account_type,
+      </if>
+      <if test="positionVol != null" >
+        position_vol,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        #{userAccount,jdbcType=CHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="positionVol != null" >
+        #{positionVol,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.common.entity.po.Account" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update account
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=CHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null" >
+        user_account = #{userAccount,jdbcType=CHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null" >
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="positionVol != null" >
+        position_vol = #{positionVol,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.common.entity.po.Account" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update account
+    set user_id = #{userId,jdbcType=CHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_account = #{userAccount,jdbcType=CHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      position_vol = #{positionVol,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectByUserIdAndType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from account
+    where user_id = #{userId,jdbcType=VARCHAR}
+    and account_type = #{accountType,jdbcType=CHAR}
+  </select>
+
+
+
+  <update id="subtractPosition">
+    update account
+    set  position_vol = (position_vol - #{amount})
+    where user_account = #{userAccount}
+    and (position_vol - #{amount}) &gt;= 0
+  </update>
+
+  <update id="addPosition">
+    update account
+    set  position_vol = (position_vol + #{amount})
+    where user_account = #{userAccount}
+  </update>
+
+  <select id="selectAllByUserId"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from account
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

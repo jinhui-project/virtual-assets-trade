@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinhui.common.mapper.FundGatherMapper" >
+  <resultMap id="BaseResultMap" type="com.jinhui.common.entity.po.FundGather" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="balance_amount" property="balanceAmount" jdbcType="DECIMAL" />
+    <result column="recharge_amount" property="rechargeAmount" jdbcType="DECIMAL" />
+    <result column="invest_amount" property="investAmount" jdbcType="DECIMAL" />
+    <result column="last_invest_amount" property="lastInvestAmount" jdbcType="DECIMAL" />
+    <result column="profit_and_loss" property="profitAndLoss" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, user_id, user_name, balance_amount, recharge_amount, invest_amount, last_invest_amount, 
+    profit_and_loss, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from fund_gather
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    delete from fund_gather
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jinhui.common.entity.po.FundGather" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into fund_gather (id, user_id, user_name, 
+      balance_amount, recharge_amount, invest_amount, 
+      last_invest_amount, profit_and_loss, create_time, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{balanceAmount,jdbcType=DECIMAL}, #{rechargeAmount,jdbcType=DECIMAL}, #{investAmount,jdbcType=DECIMAL}, 
+      #{lastInvestAmount,jdbcType=DECIMAL}, #{profitAndLoss,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinhui.common.entity.po.FundGather" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    insert into fund_gather
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="balanceAmount != null" >
+        balance_amount,
+      </if>
+      <if test="rechargeAmount != null" >
+        recharge_amount,
+      </if>
+      <if test="investAmount != null" >
+        invest_amount,
+      </if>
+      <if test="lastInvestAmount != null" >
+        last_invest_amount,
+      </if>
+      <if test="profitAndLoss != null" >
+        profit_and_loss,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceAmount != null" >
+        #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmount != null" >
+        #{rechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="investAmount != null" >
+        #{investAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="lastInvestAmount != null" >
+        #{lastInvestAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="profitAndLoss != null" >
+        #{profitAndLoss,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinhui.common.entity.po.FundGather" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update fund_gather
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="balanceAmount != null" >
+        balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeAmount != null" >
+        recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="investAmount != null" >
+        invest_amount = #{investAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="lastInvestAmount != null" >
+        last_invest_amount = #{lastInvestAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="profitAndLoss != null" >
+        profit_and_loss = #{profitAndLoss,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinhui.common.entity.po.FundGather" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    update fund_gather
+    set user_id = #{userId,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
+      invest_amount = #{investAmount,jdbcType=DECIMAL},
+      last_invest_amount = #{lastInvestAmount,jdbcType=DECIMAL},
+      profit_and_loss = #{profitAndLoss,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByUserId">
+
+      update fund_gather
+      <set >
+        <if test="userId != null" >
+          user_id = #{userId,jdbcType=VARCHAR},
+        </if>
+        <if test="userName != null" >
+          user_name = #{userName,jdbcType=VARCHAR},
+        </if>
+        <if test="balanceAmount != null" >
+          balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="rechargeAmount != null" >
+          recharge_amount = #{rechargeAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="investAmount != null" >
+          invest_amount = #{investAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="lastInvestAmount != null" >
+          last_invest_amount = #{lastInvestAmount,jdbcType=DECIMAL},
+        </if>
+        <if test="profitAndLoss != null" >
+          profit_and_loss = #{profitAndLoss,jdbcType=DECIMAL},
+        </if>
+        <if test="createTime != null" >
+          create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateTime != null" >
+          update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </set>
+      where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+  <select id="selectByUserId"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fund_gather
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+</mapper>
